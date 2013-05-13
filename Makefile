@@ -3,7 +3,7 @@ build: components index.js
 	@component-build --dev
 
 components: component.json
-	@component-install --dev -r http://localhost:6060
+	@component-install --dev
 
 node_modules: package.json
 	@npm install

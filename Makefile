@@ -9,7 +9,7 @@ node_modules: package.json
 	@npm install
 
 test: components node_modules
-	node test\server.js
+	node test/server.js
 
 clean:
 	rm -rf node_modules components build

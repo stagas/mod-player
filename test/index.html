@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>mod-player</title>
+    <link rel="stylesheet" href="../build/build.css">
+  </head>
+  <body>
+    <div id="mods"></div>
+    <input type="file" id="mod-file-input" onchange="playModFile(this.files[0])">
+    <script src="mods.js"></script>
+    <script src="../build/build.js"></script>
+    <script>
+
+    var rate = 44100;
+    var size = 8192;
+
+    document.getElementById('mods').innerHTML = mods.map(function(m){
+      return '<a href="javascript:playModUrl(\'mods/'+m+'\')">'+m+'</a>'
+    }).join('<br>');
+
+    var process = require('audio-process');
+    var ModParser = require('mod-parser');
+    var ModPlayer = require('mod-player');
+
+    var audio = new webkitAudioContext();
+    var playing = null;
+
+    function playModFile(fd){
+      var file = new FileReader();
+      file.readAsBinaryString(fd);
+      file.onload = function(e){
+        play(e.target.result);
+      };
+    }
+
+    function playModUrl(url){
+      var req = new XMLHttpRequest();
+      req.open('GET', url);
+      req.overrideMimeType("text/plain; charset=x-user-defined");
+      req.onreadystatechange = function(){
+        if (this.readyState == 4 && this.status == 200) {
+          var body = this.responseText || '';
+          var buf = [];
+
+          for (var i = 0; i < body.length; i++) {
+            buf[i] = String.fromCharCode(body.charCodeAt(i) & 255);
+          }
+
+          buf = buf.join('');
+          play(buf);
+        }
+      }
+      req.send();
+    }
+
+    function play(buffer){
+      if (playing) playing.disconnect();
+      var mod = new ModParser(buffer);
+      var player = new ModPlayer(mod, rate, size);
+      var node = playing = process(audio, size, player.process);
+      node.connect(audio.destination);
+    }
+
+    </script>
+  </body>
+</html>

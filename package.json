@@ -1,0 +1,13 @@
+{
+  "name": "mod-player",
+  "version": "0.0.1",
+  "description": "module (.mod) player in javascript",
+  "main": "index.js",
+  "repository": "stagas/mod-player",
+  "author": "stagas",
+  "license": "MIT",
+  "devDependencies": {
+    "express": "~3.2.4"
+  },
+  "readmeFilename": "README.md"
+}

@@ -9,8 +9,8 @@ module (.mod) player in javascript
 function play(buffer){
   if (playing) playing.disconnect();
   var mod = new ModParser(buffer);
-  var player = new ModPlayer(mod, rate, size);
-  var node = playing = process(audio, size, player.process);
+  var player = new ModPlayer(mod, audio.sampleRate);
+  var node = playing = process(audio, sampleLength, player.process);
   node.connect(audio.destination);
 }
 ```

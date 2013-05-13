@@ -1,6 +1,6 @@
 {
   "name": "mod-player",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "module (.mod) player in javascript",
   "keywords": ["audio","mod","player"],
   "author": "stagas",

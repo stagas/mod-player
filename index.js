@@ -115,7 +115,7 @@ module.exports = ModPlayer;
  * @api public
  */
 
-function ModPlayer(mod, rate, sampleCount) {
+function ModPlayer(mod, rate) {
   /* timing calculations */
   var ticksPerSecond = 7093789.2; /* PAL frequency */
   var ticksPerFrame; /* calculated by setBpm */
@@ -460,8 +460,8 @@ function ModPlayer(mod, rate, sampleCount) {
     }
   }
   
-  this.process = function(L, R) {
-    for (var i=0; i<sampleCount; i++) {
+  this.process = function(L, R, sampleLength) {
+    for (var i=0; i<sampleLength; i++) {
       ticksSinceStartOfFrame += ticksPerOutputSample;
       while (ticksSinceStartOfFrame >= ticksPerFrame) {
         doFrame();

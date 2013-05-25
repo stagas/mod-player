@@ -1,0 +1,1 @@
+window.mods = ["agony-intro.mod","ambpower.mod","bloe-job.mod","dope.mod","frust.mod","jammin-for-nothing.mod","mindkick.mod","ode_to_protracker.mod","parliament-of-dreams.mod","RandomVoice-Monday.mod","speed-e-boy.mod","sundance.mod"];
